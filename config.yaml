@@ -1,0 +1,155 @@
+# Data settings
+data_path:
+  - /content/codes/data.csv   # Path to the dataset
+frac:
+  - 0.01   # Fraction of data to use
+
+# Cache settings
+cache_rate:
+  - 1.0   # Rate at which data is cached
+
+# K-Fold settings
+k:
+  - 10   # Number of folds for cross-validation
+
+# Model settings
+combined:
+  - True   # Whether to use a combined model
+extra_info_list:
+  - 'male'   # List of extra features to include
+num_output:
+  - 1   # Number of output neurons in the final layer
+
+# Experiment settings
+exp_name:
+  - 'bone_age_01'   # Name of the experiment
+run:
+  - 1   # Run number
+user:
+  - 'medvira_ai'   # Username for logging purposes
+
+# Evaluation metrics
+metrics:
+  - r2s
+  - mse
+  - mae   # Metrics to evaluate the model
+
+# Model initialization
+pretrained_model_name:
+  - null   # Name of the pretrained model to use (if any)
+
+# Model training settings
+save_best_model:
+  - True   # Whether to save the best model during training
+activation_type:
+  - relu   # Activation function to use
+batch_size:
+  - 64   # Batch size for training
+classifier_size:
+  - medium   # Size of the classifier
+drop_out:
+  - 0.4   # Dropout rate
+hidden_params:
+  - 512   # Number of hidden parameters in the model
+freeze_base_first:
+  - True   # Whether to freeze the base model first
+transfer_learning:
+  - True   # Whether to use transfer learning
+
+# Learning rate settings
+initial_lr:
+  - 0.00001   # Initial learning rate
+final_lr:
+  - 0.0000001   # Final learning rate
+
+# Data augmentation settings
+augmentations:
+  - False   # Whether to use data augmentation
+
+# Data loading settings
+dataset_name:
+  - persistent_dataset   # Type of dataset to use
+defualt_mode:
+  - bilinear   # Default mode for resizing
+
+# Training settings
+check:
+  - True   # Whether to perform checks before training
+gpu:
+  - False   # Whether to use GPU for training
+losses:
+  - mse   # Loss function to use
+max_epochs:
+  - 20   # Maximum number of epochs for training
+scheduler_name:
+  - reduceonplateau   # Scheduler name for learning rate adjustment
+amp:
+  - True   # Whether to use automatic mixed precision
+val_interval:
+  - 1   # Interval at which validation is performed
+train_interval:
+  - 10   # Interval at which training steps are logged
+
+# Early stopping settings
+early_stop_callback:
+  - True   # Whether to use early stopping
+patience:
+  - 25   # Patience for early stopping
+early_stop_verbose:
+  - True   # Whether to display verbose messages for early stopping
+early_stop_delta:
+  - 0.0   # Minimum change in monitored quantity to qualify as an improvement
+optimizer:
+- adam # Optimizer name
+models:
+  efficientnet_b0:
+    # Classifier settings for EfficientNet B0
+    classifier:
+      in_features: 1280     # Number of input features to the classifier
+      key: classifier       # Key identifying the classifier layer
+
+    # Input size settings
+    input_size:
+      - 224                # Input height
+      - 224                # Input width
+
+    # Model properties
+    model_size_(MB): 20.5   # Size of the model in megabytes
+    name: efficientnet_b0   # Name of the model
+    num_params: 5288548     # Total number of parameters in the model
+
+    # Preprocessing settings
+    preprocessing:
+      crop:
+        key: image         # Key identifying the image data
+        roi:
+          - 224           # Region of interest height
+          - 224           # Region of interest width
+
+      normalize:
+        key: image         # Key identifying the image data
+        means:
+          - 0.485         # Mean value for the red channel
+          - 0.456         # Mean value for the green channel
+          - 0.406         # Mean value for the blue channel
+        stds:
+          - 0.229         # Standard deviation for the red channel
+          - 0.224         # Standard deviation for the green channel
+          - 0.225         # Standard deviation for the blue channel
+
+      resize:
+        key: image         # Key identifying the image data
+        mode: bicubic      # Resizing mode
+        size:
+          - 256           # Resize height
+          - 256           # Resize width
+
+      scale:
+        key: image         # Key identifying the image data
+        maxv: 1            # Maximum value for scaling
+        minv: 0            # Minimum value for scaling
+
+    # Weights for the model
+    weights: IMAGENET1K_V1  # Pretrained weights to use
+
+
